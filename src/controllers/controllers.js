@@ -10,7 +10,7 @@ const fetchFlipkartMobileProducts = async () => {
         const products = [];
         
         // Data Extracted from HTML recieved from fetch url, using CSS selectors from the Cheerio library
-//Nx9bqj _4b5DiR
+
         $('.KzDlHZ').each((index, element) => {
             const productName = $(element).text().trim();
             const productPrice = $(element).closest('._75nlfW').find('.Nx9bqj').first().text().trim();
@@ -37,8 +37,6 @@ const fetchFlipkartMobileProducts = async () => {
     }
 };
 
-
-
 const fetchSnapdealTShirtProducts = async () => {
     try {
         const url = 'https://www.snapdeal.com/products/mens-tshirts-polos?sort=plrty';
@@ -58,9 +56,8 @@ const fetchSnapdealTShirtProducts = async () => {
     }
 };
 
-// const productURL = `https://www.flipkart.com${$(element).closest('._75nlfW').find('a').attr('href')}`;
-
-
+// In this route Product Description would be fetched from each seperate product page an would be displayed
+// Data would include name, price and discription from the product page
 
 const fetchFullFlipkartMobileProducts = async () => {
     try {
@@ -79,12 +76,10 @@ const fetchFullFlipkartMobileProducts = async () => {
             const productHTML = await productResponse.text();
             const product$ = cheerio.load(productHTML);
 
-            // Extract product name, price, and description from product page
             const productName = product$('span.VU-ZEz').text();
             const productPrice = product$('div.CxhGGd').text();
             const productDescription = product$('div._4gvKMe').text();
-            
-            // Output product details
+
             console.log("Product Name:", productName);
             console.log("Product Price:", productPrice);
             console.log("Product Description:", productDescription);

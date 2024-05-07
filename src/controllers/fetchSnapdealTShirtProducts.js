@@ -10,7 +10,7 @@ const csvWriter = createCsvWriter({
     ],
     path: './src/data/tshirtData.csv'
 });
-const fetchSnapdealTShirtProducts = async () => {
+const fetchSnapdealTShirtProducts = async (req,res) => {
     try {
         const url = 'https://www.snapdeal.com/products/mens-tshirts-polos?sort=plrty';
         const response = await fetch(url);
@@ -23,7 +23,7 @@ const fetchSnapdealTShirtProducts = async () => {
             const price = $(element).find('.product-price').text().trim();
             products.push({ name, price });
         });
-        console.log(products)
+        res.status(200).json(products)
         await csvWriter.writeRecords(products);
         console.log("CSV Saved");    
 

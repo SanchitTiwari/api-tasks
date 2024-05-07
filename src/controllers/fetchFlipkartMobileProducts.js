@@ -13,7 +13,7 @@ const csvWriter = createCsvWriter({
     path: './src/data/mobileData.csv'
 });
 
-const fetchFlipkartMobileProducts = async () => {
+const fetchFlipkartMobileProducts = async (req,res) => {
     try {
         const url = 'https://www.flipkart.com/mobiles/smartphones~type/pr?page=11&sid=tyy%2C4io';
         const response = await fetch(url);
@@ -41,7 +41,7 @@ const fetchFlipkartMobileProducts = async () => {
         
             products.push(product);
         });
-
+    res.status(200).json(products)
     console.log(products)
     await csvWriter.writeRecords(products);
     console.log("CSV Saved");    

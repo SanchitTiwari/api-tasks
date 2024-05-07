@@ -41,12 +41,13 @@ const fetchFullFlipkartMobileProducts = async (req,res) => {
             }
             products.push(product);
 }
-res.status(200).json(products)
 await csvWriter.writeRecords(products);
-console.log("CSV Saved");    
+console.log("CSV Saved"); 
+res.status(200).json(products)   
 
     } catch (error) {
-        console.error(error);
+        console.error(err.message);
+        res.status(500).send('Server Error');
     }
 
 };
